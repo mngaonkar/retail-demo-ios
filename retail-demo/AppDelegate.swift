@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Meridian
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         // Override point for customization after application launch.
+        let config = MRConfig()
+        config.applicationToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0IjoxNTU4NjgyMzEzLCJ2YWx1ZSI6IjFmYjdiMWIwMDg3MTRmMTEwZWYyNDMzODI2OGI2M2NmNDZiYzYxYTAifQ.PSTdrdOalkVA4dHr4EOTG8qb9RljxzpbIx7RT9o8Zfg"
+        Meridian.configure(config)
+        
         return true
     }
 
