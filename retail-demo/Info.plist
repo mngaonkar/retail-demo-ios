@@ -45,5 +45,9 @@
 	<string>Allow location access to make the exprience awesome</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Allow location access to make the exprience awesome</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Allow to listen to make an awesome experience</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow to listen to make an awesome experience</string>
 </dict>
 </plist>
