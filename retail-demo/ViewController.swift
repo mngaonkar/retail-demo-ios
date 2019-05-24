@@ -18,6 +18,10 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     let synthesizer = AVSpeechSynthesizer()
     let audioEngine = AVAudioEngine()
     let recognizer = SFSpeechRecognizer()
+    let request = SFSpeechAudioBufferRecognitionRequest()
+    var recognitionTask: SFSpeechRecognitionTask?
+    
+    var recordStatus: Bool = false
     
     let MAP_ID = "5764017373052928"
     let APP_ID = "5737079267393536"
@@ -48,8 +52,42 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         textToSpeech(text: "Welcome to meridian demo, have a great day ahead")
     }
 
-    @IBAction func voiceButtonClicked(_ sender: Any) {
+    func startRecording(){
+        let node = audioEngine.inputNode
+        let format = node.outputFormat(forBus: 0)
         
+        node.installTap(onBus: 0, bufferSize: 1024, format: format) { (buffer, _) in
+            self.request.append(buffer)
+        }
+        audioEngine.prepare()
+        do {
+            try audioEngine.start()
+        } catch let error {
+            print("Recording cannot be started\(error.localizedDescription)")
+        }
+        
+        recognitionTask = recognizer?.recognitionTask(with: request) {
+            (result, _) in
+            if let transcription = result?.bestTranscription {
+                print(transcription.formattedString)
+            }
+        }
+    }
+    
+    func stopRecording(){
+        audioEngine.stop()
+        request.endAudio()
+        recognitionTask?.cancel()
+    }
+    
+    @IBAction func voiceButtonClicked(_ sender: Any) {
+        if (recordStatus){
+            stopRecording()
+            recordStatus = true
+        }else{
+            startRecording()
+            recordStatus = false
+        }
     }
     
     func mapView(_ mapView: MRMapView, rendererFor overlay: MRPathOverlay) -> MRPathRenderer? {
