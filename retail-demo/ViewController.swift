@@ -49,7 +49,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         voiceButton.layer.shadowOpacity = 0.75
         voiceButton.layer.shadowRadius = 5
             
-        textToSpeech(text: "Welcome to meridian demo, have a great day ahead")
+        textToSpeech(text: "Welcome to meridian demo, have a great experience ahead")
     }
 
     func startRecording(){
