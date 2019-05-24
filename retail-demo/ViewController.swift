@@ -9,11 +9,14 @@
 import UIKit
 import AVFoundation
 import Speech
+import WebKit
 import Meridian
 
-class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDelegate {
+class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDelegate, WKNavigationDelegate, WKUIDelegate {
     
     var mapView: MRMapView!
+    var webView: WKWebView!
+    var webViewConfig: WKWebViewConfiguration!
     var locationManager: MRLocationManager!
     let synthesizer = AVSpeechSynthesizer()
     let audioEngine = AVAudioEngine()
@@ -44,7 +47,9 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         
         mapView.mapKey = MREditorKey(forMap: MAP_ID, app: APP_ID)
         
+        // Show Meridian map view
         // self.view.addSubview(mapView)
+        
         voiceButton.layer.cornerRadius = voiceButton.frame.height/2
         voiceButton.layer.shadowOpacity = 0.75
         voiceButton.layer.shadowRadius = 5
@@ -52,6 +57,21 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         textToSpeech(text: "Welcome to meridian demo, have a great experience ahead")
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        // Show WebKit view
+        webViewConfig = WKWebViewConfiguration()
+        webView = WKWebView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size), configuration: webViewConfig)
+        
+        webView.navigationDelegate = self
+        webView.uiDelegate = self
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(webView)
+        // self.view = webView
+        
+        let url = URL(string: "http://www.odishabytes.com/wp-content/uploads/2019/02/sunny-leone3.jpeg")!
+        webView.load(URLRequest(url:url))
+    }
+    
     func startRecording(){
         let node = audioEngine.inputNode
         let format = node.outputFormat(forBus: 0)
