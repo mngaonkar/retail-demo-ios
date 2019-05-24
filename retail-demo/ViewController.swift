@@ -9,11 +9,13 @@
 import UIKit
 import Meridian
 
-class ViewController: UIViewController, MRMapViewDelegate {
+class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDelegate {
     
-    var config: MRConfig!
     var mapView: MRMapView!
-    var appKey: MREditorKey!
+    var locationManager: MRLocationManager!
+    
+    let MAP_ID = "5764017373052928"
+    let APP_ID = "5737079267393536"
     
     func mapPickerDidPick(_ map: MRMap) {
         
@@ -23,12 +25,25 @@ class ViewController: UIViewController, MRMapViewDelegate {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        mapView = MRMapView(frame: self.view.bounds)
-        mapView.mapKey = MREditorKey(forMap: "5764017373052928", app: "5737079267393536")
-        self.view.addSubview(mapView)
+        locationManager = MRLocationManager(app: MREditorKey(identifier: APP_ID))
+        locationManager.delegate = self
         
+        mapView = MRMapView(frame: self.view.bounds)
+        // mapView.delegate = self
+        
+        mapView.mapKey = MREditorKey(forMap: MAP_ID, app: APP_ID)
+        self.view.addSubview(mapView)
     }
 
-
+    func mapView(_ mapView: MRMapView, rendererFor overlay: MRPathOverlay) -> MRPathRenderer? {
+        let renderer = MRPathRenderer(overlay: overlay)
+        
+        renderer.strokeColor = UIColor.red
+        return renderer
+    }
+    
+    func locationManager(_ manager: MRLocationManager, didUpdateTo location: MRLocation) {
+        
+    }
 }
 
