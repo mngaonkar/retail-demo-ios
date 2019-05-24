@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import AVFoundation
 import Meridian
 
 class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDelegate {
     
     var mapView: MRMapView!
     var locationManager: MRLocationManager!
+    let synthesizer = AVSpeechSynthesizer()
     
     let MAP_ID = "5764017373052928"
     let APP_ID = "5737079267393536"
@@ -33,6 +35,8 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         
         mapView.mapKey = MREditorKey(forMap: MAP_ID, app: APP_ID)
         self.view.addSubview(mapView)
+        
+        speak(text: "Welcome to meridian demo, have a great day ahead")
     }
 
     func mapView(_ mapView: MRMapView, rendererFor overlay: MRPathOverlay) -> MRPathRenderer? {
@@ -44,6 +48,11 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     
     func locationManager(_ manager: MRLocationManager, didUpdateTo location: MRLocation) {
         
+    }
+    
+    func speak(text: String) {
+        let utterance = AVSpeechUtterance(string: text)
+        synthesizer.speak(utterance)
     }
 }
 

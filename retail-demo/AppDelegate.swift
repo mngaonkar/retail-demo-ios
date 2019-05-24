@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Meridian
+import ApiAI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,8 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Override point for customization after application launch.
         let config = MRConfig()
+        
+        // Configure meridian application token here
         config.applicationToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0IjoxNTU4NjgyMzEzLCJ2YWx1ZSI6IjFmYjdiMWIwMDg3MTRmMTEwZWYyNDMzODI2OGI2M2NmNDZiYzYxYTAifQ.PSTdrdOalkVA4dHr4EOTG8qb9RljxzpbIx7RT9o8Zfg"
         Meridian.configure(config)
+        
+        let apiAIConfiguration = AIDefaultConfiguration()
+        
+        // configure dialogflow token here
+        apiAIConfiguration.clientAccessToken = "12345"
+        
+        let ai = ApiAI.shared()
+        ai?.configuration = apiAIConfiguration
         
         return true
     }
