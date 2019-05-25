@@ -193,14 +193,17 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
             (result, error) in
             if let transcription = result?.bestTranscription {
                 print("User request = \(transcription.formattedString)")
-                self.stopRecording()
-                self.spokenText.text = transcription.formattedString
-                self.sendRequest(textRequest: self.spokenText.text!)
+                // self.stopRecording()
+                // self.spokenText.text = transcription.formattedString
+                // self.sendRequest(textRequest: self.spokenText.text!)
                 // self.restartSpeechTimer()
                 
                 
                 if (result?.isFinal)!{
                     print("Final transcript = \(transcription.formattedString)")
+                    
+                    self.spokenText.text = transcription.formattedString
+                    self.sendRequest(textRequest: self.spokenText.text!)
                 }
                 
                 // Restart the voice recognition as we want to capture few words only
@@ -208,18 +211,18 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                     self.restartSpeechTimer()
                 }
             } else if let error = error {
-                print(error)
+                print("Error occured during recognition = \(error)")
             }
         }
     }
     
     // Stop listening to user voice
     func stopRecording(){
-        recognitionTask?.cancel()
-        request.endAudio()
         audioEngine.stop()
         let node = audioEngine.inputNode
         node.removeTap(onBus: 0)
+        recognitionTask?.finish()
+        request.endAudio()
     }
     
     // Control the voice command button
