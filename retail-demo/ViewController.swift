@@ -64,7 +64,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         //rootView.insertSubview(webView, at: 0)
         
         // loadURL(urlAddress: "https://cdn.pixabay.com/photo/2018/05/07/09/38/plants-3380443_960_720.jpg")
-        loadURL(urlAddress: "https://www.apple.com/")
+        loadURL(urlAddress: "https://www.reddit.com/")
     }
     
     // Open a dynamic web page in web view
@@ -78,21 +78,21 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         locationManager = MRLocationManager(app: MREditorKey(identifier: APP_ID))
         locationManager.delegate = self
         
-        mapView = MRMapView(frame: self.view.bounds)
+        mapView = MRMapView(frame: self.containerView.bounds)
         mapView.delegate = self
         
         mapView.mapKey = MREditorKey(forMap: MAP_ID, app: APP_ID)
         
         // Show Meridian map view
-        self.view.addSubview(mapView)
+        self.containerView.addSubview(mapView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         // Do any additional setup after loading the view.
-        // loadMap()
-        loadWebView()
+        loadMap()
+        // loadWebView()
         
         voiceButton.layer.cornerRadius = voiceButton.frame.height/2
         voiceButton.layer.shadowOpacity = 0.75
@@ -102,8 +102,11 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        webView.uiDelegate = self
-        webView.navigationDelegate = self
+        if webView != nil {
+            webView.uiDelegate = self
+            webView.navigationDelegate = self
+        }
+        
     }
     
     // Reset the timer after few seconds so as not to keep the audio engine running
