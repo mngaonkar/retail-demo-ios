@@ -34,6 +34,21 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     }
     
     @IBOutlet weak var voiceButton: UIButton!
+    @IBOutlet weak var spokenText: UILabel!
+    
+    override func loadView() {
+        super.loadView()
+        
+        // Show WebKit view
+        webViewConfig = WKWebViewConfiguration()
+        webView = WKWebView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size), configuration: webViewConfig)
+        
+        webView.navigationDelegate = self
+        webView.uiDelegate = self
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        // self.view.addSubview(webView)
+        // self.view = webView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,16 +73,6 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        // Show WebKit view
-        webViewConfig = WKWebViewConfiguration()
-        webView = WKWebView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size), configuration: webViewConfig)
-        
-        webView.navigationDelegate = self
-        webView.uiDelegate = self
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(webView)
-        // self.view = webView
-        
         let url = URL(string: "http://www.odishabytes.com/wp-content/uploads/2019/02/sunny-leone3.jpeg")!
         webView.load(URLRequest(url:url))
     }
@@ -90,6 +95,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
             (result, _) in
             if let transcription = result?.bestTranscription {
                 print(transcription.formattedString)
+                self.spokenText.text = transcription.formattedString
             }
         }
     }
