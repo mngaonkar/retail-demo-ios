@@ -91,7 +91,8 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         
         request?.setMappedCompletionBlockSuccess({ (request, response) in
             let response = response as! AIResponse
-            if let textResponse = response.result.fulfillment.speech{
+            if let richResponse = response.result.fulfillment.messages.first{
+                let textResponse = richResponse["speech"] as! String
                 print("Response from agent = \(textResponse)")
                 self.textToSpeech(text: textResponse)
             }
@@ -125,7 +126,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         recognitionTask = recognizer?.recognitionTask(with: request) {
             (result, error) in
             if let transcription = result?.bestTranscription {
-                print(transcription.formattedString)
+                print("User request = \(transcription.formattedString)")
                 
                 self.spokenText.text = transcription.formattedString
                 self.sendRequest(textRequest: self.spokenText.text!)
