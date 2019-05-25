@@ -49,5 +49,7 @@
 	<string>Allow to listen to make an awesome experience</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow to listen to make an awesome experience</string>
+	<key>NSExceptionAllowsInsecureHTTPLoads</key>
+	<true/>
 </dict>
 </plist>

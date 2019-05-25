@@ -43,9 +43,12 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     func loadWebView() {
         // Show WebKit view
         webViewConfig = WKWebViewConfiguration()
+        webViewConfig.allowsInlineMediaPlayback = true
+        webViewConfig.allowsAirPlayForMediaPlayback = true
+        webViewConfig.allowsPictureInPictureMediaPlayback = true
+        webViewConfig.mediaTypesRequiringUserActionForPlayback = []
+        
         webView = WKWebView(frame: CGRect(origin: CGPoint.zero, size: self.containerView.frame.size), configuration: webViewConfig)
-        // webView = WKWebView()
-        // webView = WKWebView(frame: .zero, configuration: webViewConfig)
         
         webView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.addSubview(webView)
@@ -102,7 +105,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         
         voiceButton.layer.cornerRadius = voiceButton.frame.height/2
         voiceButton.layer.shadowOpacity = 0.75
-        voiceButton.layer.shadowRadius = 5
+        voiceButton.layer.shadowRadius = 3
             
         // textToSpeech(text: "Welcome to meridian demo, have a great experience ahead")
     }
@@ -149,6 +152,14 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                         print("Text response from agent = \(textResponse)")
                         self.textToSpeech(text: textResponse)
                         textResponseReceived = true
+                    } else if responseType == "custom_payload" {
+                        let customResponse = item["payload"] as! NSDictionary
+                        let payload = customResponse["google"] as! NSDictionary
+                        let url = payload["movie"] as! String
+                        print("Movie response from agent = \(url)")
+                        self.loadURL(urlAddress: url)
+                    }else {
+                        print("Unknown response type = \(responseType)")
                     }
                 } else if item["type"] is Int {
                     let responseType = item["type"] as! Int
