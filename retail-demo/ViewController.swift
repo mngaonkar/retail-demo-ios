@@ -180,13 +180,18 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     
     // Start listening to voice commands
     func startRecording(){
+        print("Starting recording")
         let node = audioEngine.inputNode
         let format = node.outputFormat(forBus: 0)
         
         node.installTap(onBus: 0, bufferSize: 1024, format: format) { (buffer, _) in
             self.request.append(buffer)
         }
+        print("Tap installed")
+        
         audioEngine.prepare()
+        print("Audio engine prepared")
+        
         do {
             try audioEngine.start()
         } catch let error {
@@ -206,7 +211,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                 
                 if (result?.isFinal)!{
                     print("Final transcript = \(transcription.formattedString)")
-                    
+                    self.stopRecording()
                     self.spokenText.text = transcription.formattedString
                     self.sendRequest(textRequest: self.spokenText.text!)
                 }
@@ -214,20 +219,28 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                 // Restart the voice recognition as we want to capture few words only
                 if (error == nil){
                     self.restartSpeechTimer()
+                    print("Speech time out")
                 }
             } else if let error = error {
                 print("Error occured during recognition = \(error)")
+                self.textToSpeech(text: "seems like we are timing out here, bye!")
+                self.stopRecording()
             }
         }
+        print("Recording started")
+        self.recordStatus = true
     }
     
     // Stop listening to user voice
     func stopRecording(){
+        print("Stoping recording...")
         audioEngine.stop()
         let node = audioEngine.inputNode
         node.removeTap(onBus: 0)
         recognitionTask?.finish()
         request.endAudio()
+        print("Recording stopped")
+        self.recordStatus = false
     }
     
     // Control the voice command button
