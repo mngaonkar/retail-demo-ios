@@ -71,7 +71,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         voiceButton.layer.shadowOpacity = 0.75
         voiceButton.layer.shadowRadius = 5
             
-        textToSpeech(text: "Welcome to meridian demo, have a great experience ahead")
+        // textToSpeech(text: "Welcome to meridian demo, have a great experience ahead")
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -91,10 +91,18 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         
         request?.setMappedCompletionBlockSuccess({ (request, response) in
             let response = response as! AIResponse
+            print("Response count = \(response.result.fulfillment.messages.count)")
             if let richResponse = response.result.fulfillment.messages.first{
-                let textResponse = richResponse["speech"] as! String
-                print("Response from agent = \(textResponse)")
-                self.textToSpeech(text: textResponse)
+                let responseType = richResponse["type"] as! String
+                print("Response type = \(responseType)")
+                if responseType == "basic_card" {
+                    let imageResponse = richResponse["imageUrl"] as! String
+                    print("Image response from agent = \(imageResponse)")
+                } else if responseType == "simple_response" {
+                    let textResponse = richResponse["textToSpeech"] as! String
+                    print("Text response from agent = \(textResponse)")
+                    self.textToSpeech(text: textResponse)
+                }
             }
             
         }, failure: { (request, error) in
