@@ -25,9 +25,9 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
     var timer: Timer!
-    
     var recordStatus: Bool = false
     
+    // Get follwing IDs from Meridian editor URL
     let MAP_ID = "5764017373052928"
     let APP_ID = "5737079267393536"
     
@@ -40,7 +40,10 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     
     override func loadView() {
         super.loadView()
-        
+    }
+    
+    // Load webkit view for rich media content
+    func loadWebView() {
         // Show WebKit view
         webViewConfig = WKWebViewConfiguration()
         webView = WKWebView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size), configuration: webViewConfig)
@@ -48,14 +51,20 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
-        // self.view.addSubview(webView)
+        self.view.addSubview(webView)
         // self.view = webView
+        
+        loadURL(urlAddress: "http://www.odishabytes.com/wp-content/uploads/2019/02/sunny-leone3.jpeg")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+    // Open a dynamic web page in web view
+    func loadURL(urlAddress: String) {
+        let url = URL(string: urlAddress)!
+        webView.load(URLRequest(url:url))
+    }
+    
+    // Load Meridian map view for indoor navigation
+    func loadMap() {
         locationManager = MRLocationManager(app: MREditorKey(identifier: APP_ID))
         locationManager.delegate = self
         
@@ -65,7 +74,15 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         mapView.mapKey = MREditorKey(forMap: MAP_ID, app: APP_ID)
         
         // Show Meridian map view
-        // self.view.addSubview(mapView)
+        self.view.addSubview(mapView)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+        // loadMap()
+        loadWebView()
         
         voiceButton.layer.cornerRadius = voiceButton.frame.height/2
         voiceButton.layer.shadowOpacity = 0.75
@@ -75,10 +92,10 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        let url = URL(string: "http://www.odishabytes.com/wp-content/uploads/2019/02/sunny-leone3.jpeg")!
-        webView.load(URLRequest(url:url))
+        
     }
     
+    // Reset the timer after few seconds so as not to keep the audio engine running
     func restartSpeechTimer(){
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (timer) in
@@ -86,6 +103,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         })
     }
     
+    // Send request to Google Assistant and handle the response
     func sendRequest(textRequest: String){
         let request = ApiAI.shared()?.textRequest()
         
@@ -98,7 +116,9 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                     let responseType = item["type"] as! String
                     if responseType == "basic_card" {
                         let imageResponse = item["image"] as! NSDictionary
-                        print("Image response from agent = \(imageResponse["url"] as! String)")
+                        let url = imageResponse["url"] as! String
+                        print("Image response from agent = \(url)")
+                        self.loadURL(urlAddress: url)
                     } else if responseType == "simple_response" {
                         let textResponse = item["textToSpeech"] as! String
                         print("Text response from agent = \(textResponse)")
@@ -128,6 +148,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         }
     }
     
+    // Start listening to voice commands
     func startRecording(){
         let node = audioEngine.inputNode
         let format = node.outputFormat(forBus: 0)
@@ -166,12 +187,14 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         }
     }
     
+    // Stop listening to user voice
     func stopRecording(){
         audioEngine.stop()
         request.endAudio()
         recognitionTask?.cancel()
     }
     
+    // Control the voice command button
     @IBAction func voiceButtonClicked(_ sender: Any) {
         if (recordStatus){
             stopRecording()
@@ -193,6 +216,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         
     }
     
+    // Speak out the text received from Google Assistant
     func textToSpeech(text: String) {
         let utterance = AVSpeechUtterance(string: text)
         synthesizer.speak(utterance)
