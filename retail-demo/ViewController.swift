@@ -229,7 +229,10 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     
     // Speak out the text received from Google Assistant
     func textToSpeech(text: String) {
+        let audioSession = AVAudioSession.sharedInstance()
+        try! audioSession.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
         let utterance = AVSpeechUtterance(string: text)
+        utterance.volume = 1.0
         synthesizer.speak(utterance)
     }
 }

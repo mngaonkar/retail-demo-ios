@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="retail_demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhM-hc-KOZ">
-                                <rect key="frame" x="340" y="812" width="64" height="64"/>
+                                <rect key="frame" x="250" y="598" width="64" height="64"/>
                                 <state key="normal" image="mic-icon"/>
                                 <connections>
                                     <action selector="voiceButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ttl-tY-Onb"/>
@@ -33,16 +33,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOX-DY-sSo">
-                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="571"/>
                                 <color key="backgroundColor" red="0.83216959239999999" green="0.98548370600000001" blue="0.47333085539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fhM-hc-KOZ" firstAttribute="top" secondItem="aOX-DY-sSo" secondAttribute="bottom" id="EJL-M7-r6b"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fhM-hc-KOZ" secondAttribute="trailing" constant="10" id="GsW-GM-ARr"/>
-                            <constraint firstAttribute="bottom" secondItem="fhM-hc-KOZ" secondAttribute="bottom" constant="20" id="Lao-Zd-sj8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fhM-hc-KOZ" secondAttribute="bottom" constant="5" id="0fv-kB-RQP"/>
+                            <constraint firstItem="fhM-hc-KOZ" firstAttribute="top" secondItem="aOX-DY-sSo" secondAttribute="bottom" constant="7" id="574-om-2A0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fhM-hc-KOZ" secondAttribute="trailing" constant="61" id="CGt-XJ-CwZ"/>
                             <constraint firstItem="aOX-DY-sSo" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XYl-zh-0Pe"/>
+                            <constraint firstItem="fhM-hc-KOZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="250" id="u51-4M-XgS"/>
                             <constraint firstItem="aOX-DY-sSo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xTQ-uB-9e8"/>
                             <constraint firstItem="aOX-DY-sSo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zKr-up-UCe"/>
                         </constraints>
@@ -63,7 +64,7 @@
             <objects>
                 <viewController id="sxh-v6-KFf" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zYb-n4-Y81">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Q6o-p5-9Qm"/>
