@@ -124,6 +124,8 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     
     // Send request to Google Assistant and handle the response
     func sendRequest(textRequest: String){
+        var textResponseReceived = false
+        
         let request = ApiAI.shared()?.textRequest()
         
         request?.setMappedCompletionBlockSuccess({ (request, response) in
@@ -142,13 +144,18 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                         let textResponse = item["textToSpeech"] as! String
                         print("Text response from agent = \(textResponse)")
                         self.textToSpeech(text: textResponse)
+                        textResponseReceived = true
                     }
                 } else if item["type"] is Int {
                     let responseType = item["type"] as! Int
                     switch responseType {
                     case 0:
                         let textResponse = item["speech"] as! String
-                        self.textToSpeech(text: textResponse)
+                        print("Text response from agent = \(textResponse)")
+                        if !textResponseReceived {
+                            self.textToSpeech(text: textResponse)
+                        }
+                        
                     default:
                         print("default case")
                     }
@@ -186,11 +193,11 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
             (result, error) in
             if let transcription = result?.bestTranscription {
                 print("User request = \(transcription.formattedString)")
-                
+                self.stopRecording()
                 self.spokenText.text = transcription.formattedString
                 self.sendRequest(textRequest: self.spokenText.text!)
                 // self.restartSpeechTimer()
-                self.stopRecording()
+                
                 
                 if (result?.isFinal)!{
                     print("Final transcript = \(transcription.formattedString)")
