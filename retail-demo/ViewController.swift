@@ -49,11 +49,6 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         
         webView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.addSubview(webView)
-        // self.containerView.bringSubviewToFront(webView)
-        
-        // view = webView
-        // self.view.addSubview(webView)
-        // self.view.bringSubviewToFront(webView)
         
         print("Total subviews = \(self.view.subviews.count)")
         // let rootView = self.view.subviews[0]
@@ -71,6 +66,16 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     func loadURL(urlAddress: String) {
         let url = URL(string: urlAddress)!
         webView.load(URLRequest(url:url))
+    }
+    
+    // Knock off web view out of sight
+    func unloadWebView() {
+        self.webView.removeFromSuperview()
+    }
+    
+    // Here goes Meridian map
+    func unloadMap() {
+        self.mapView.removeFromSuperview()
     }
     
     // Load Meridian map view for indoor navigation
@@ -91,8 +96,8 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         super.viewDidLoad()
     
         // Do any additional setup after loading the view.
-        loadMap()
-        // loadWebView()
+        // loadMap()
+        loadWebView()
         
         voiceButton.layer.cornerRadius = voiceButton.frame.height/2
         voiceButton.layer.shadowOpacity = 0.75
@@ -185,7 +190,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                 self.spokenText.text = transcription.formattedString
                 self.sendRequest(textRequest: self.spokenText.text!)
                 // self.restartSpeechTimer()
-                //self.stopRecording()
+                self.stopRecording()
                 
                 if (result?.isFinal)!{
                     print("Final transcript = \(transcription.formattedString)")
@@ -203,9 +208,11 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     
     // Stop listening to user voice
     func stopRecording(){
-        audioEngine.stop()
-        request.endAudio()
         recognitionTask?.cancel()
+        request.endAudio()
+        audioEngine.stop()
+        let node = audioEngine.inputNode
+        node.removeTap(onBus: 0)
     }
     
     // Control the voice command button
