@@ -32,15 +32,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOX-DY-sSo">
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
+                                <color key="backgroundColor" red="0.83216959239999999" green="0.98548370600000001" blue="0.47333085539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="fhM-hc-KOZ" firstAttribute="top" secondItem="aOX-DY-sSo" secondAttribute="bottom" id="EJL-M7-r6b"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fhM-hc-KOZ" secondAttribute="trailing" constant="10" id="GsW-GM-ARr"/>
                             <constraint firstAttribute="bottom" secondItem="fhM-hc-KOZ" secondAttribute="bottom" constant="20" id="Lao-Zd-sj8"/>
+                            <constraint firstItem="aOX-DY-sSo" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XYl-zh-0Pe"/>
+                            <constraint firstItem="aOX-DY-sSo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xTQ-uB-9e8"/>
+                            <constraint firstItem="aOX-DY-sSo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zKr-up-UCe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="aOX-DY-sSo" id="OvH-mx-s8w"/>
                         <outlet property="spokenText" destination="bDi-G0-5a5" id="hY6-Uk-FMV"/>
                         <outlet property="voiceButton" destination="fhM-hc-KOZ" id="vuU-Sy-Loq"/>
                     </connections>

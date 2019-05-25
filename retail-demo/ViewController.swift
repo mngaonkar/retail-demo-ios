@@ -37,24 +37,34 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     
     @IBOutlet weak var voiceButton: UIButton!
     @IBOutlet weak var spokenText: UILabel!
-    
-    override func loadView() {
-        super.loadView()
-    }
+    @IBOutlet weak var containerView: UIView!
     
     // Load webkit view for rich media content
     func loadWebView() {
         // Show WebKit view
         webViewConfig = WKWebViewConfiguration()
-        webView = WKWebView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size), configuration: webViewConfig)
+        webView = WKWebView(frame: CGRect(origin: CGPoint.zero, size: self.containerView.frame.size), configuration: webViewConfig)
+        // webView = WKWebView()
+        // webView = WKWebView(frame: .zero, configuration: webViewConfig)
         
-        webView.navigationDelegate = self
-        webView.uiDelegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(webView)
-        // self.view = webView
+        self.containerView.addSubview(webView)
+        // self.containerView.bringSubviewToFront(webView)
         
-        loadURL(urlAddress: "http://www.odishabytes.com/wp-content/uploads/2019/02/sunny-leone3.jpeg")
+        // view = webView
+        // self.view.addSubview(webView)
+        // self.view.bringSubviewToFront(webView)
+        
+        print("Total subviews = \(self.view.subviews.count)")
+        // let rootView = self.view.subviews[0]
+        // webView.frame = rootView.bounds
+        // rootView.addSubview(webView)
+        // rootView.bringSubviewToFront(webView)
+        
+        //rootView.insertSubview(webView, at: 0)
+        
+        // loadURL(urlAddress: "https://cdn.pixabay.com/photo/2018/05/07/09/38/plants-3380443_960_720.jpg")
+        loadURL(urlAddress: "https://www.apple.com/")
     }
     
     // Open a dynamic web page in web view
@@ -79,7 +89,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         // Do any additional setup after loading the view.
         // loadMap()
         loadWebView()
@@ -92,7 +102,8 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
     }
     
     // Reset the timer after few seconds so as not to keep the audio engine running
