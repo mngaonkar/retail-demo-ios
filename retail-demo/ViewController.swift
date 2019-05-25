@@ -52,7 +52,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         
         print("Total subviews = \(self.view.subviews.count)")
         // let rootView = self.view.subviews[0]
-        // webView.frame = rootView.bounds
+        webView.frame = self.containerView.bounds
         // rootView.addSubview(webView)
         // rootView.bringSubviewToFront(webView)
         
@@ -92,12 +92,13 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         self.containerView.addSubview(mapView)
     }
     
+    // Create additional widget here
     override func viewDidLoad() {
         super.viewDidLoad()
     
         // Do any additional setup after loading the view.
         // loadMap()
-        loadWebView()
+        // loadWebView()
         
         voiceButton.layer.cornerRadius = voiceButton.frame.height/2
         voiceButton.layer.shadowOpacity = 0.75
@@ -106,7 +107,10 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         // textToSpeech(text: "Welcome to meridian demo, have a great experience ahead")
     }
 
+    // Put all the view related code here
     override func viewDidAppear(_ animated: Bool) {
+        loadWebView()
+        
         if webView != nil {
             webView.uiDelegate = self
             webView.navigationDelegate = self
@@ -193,6 +197,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
             (result, error) in
             if let transcription = result?.bestTranscription {
                 print("User request = \(transcription.formattedString)")
+                self.spokenText.text = transcription.formattedString
                 // self.stopRecording()
                 // self.spokenText.text = transcription.formattedString
                 // self.sendRequest(textRequest: self.spokenText.text!)
