@@ -11,6 +11,7 @@ import AVFoundation
 import Speech
 import WebKit
 import Meridian
+import ApiAI
 
 class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDelegate, WKNavigationDelegate, WKUIDelegate {
     
@@ -23,6 +24,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     let recognizer = SFSpeechRecognizer()
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
+    var timer: Timer!
     
     var recordStatus: Bool = false
     
@@ -77,6 +79,35 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         webView.load(URLRequest(url:url))
     }
     
+    func restartSpeechTimer(){
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (timer) in
+            self.stopRecording()
+        })
+    }
+    
+    func sendRequest(textRequest: String){
+        let request = ApiAI.shared()?.textRequest()
+        
+        request?.setMappedCompletionBlockSuccess({ (request, response) in
+            let response = response as! AIResponse
+            if let textResponse = response.result.fulfillment.speech{
+                print("Response from agent = \(textResponse)")
+                self.textToSpeech(text: textResponse)
+            }
+            
+        }, failure: { (request, error) in
+            print(error!)
+        })
+        
+        if textRequest != "" {
+            request?.query = textRequest
+            ApiAI.shared()?.enqueue(request)
+        } else {
+            return
+        }
+    }
+    
     func startRecording(){
         let node = audioEngine.inputNode
         let format = node.outputFormat(forBus: 0)
@@ -92,10 +123,25 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         }
         
         recognitionTask = recognizer?.recognitionTask(with: request) {
-            (result, _) in
+            (result, error) in
             if let transcription = result?.bestTranscription {
                 print(transcription.formattedString)
+                
                 self.spokenText.text = transcription.formattedString
+                self.sendRequest(textRequest: self.spokenText.text!)
+                // self.restartSpeechTimer()
+                //self.stopRecording()
+                
+                if (result?.isFinal)!{
+                    print("Final transcript = \(transcription.formattedString)")
+                }
+                
+                // Restart the voice recognition as we want to capture few words only
+                if (error == nil){
+                    self.restartSpeechTimer()
+                }
+            } else if let error = error {
+                print(error)
             }
         }
     }
