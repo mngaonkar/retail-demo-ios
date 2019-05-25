@@ -25,9 +25,8 @@
                                     <action selector="voiceButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ttl-tY-Onb"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDi-G0-5a5">
-                                <rect key="frame" x="13" y="600" width="280" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDi-G0-5a5">
+                                <rect key="frame" x="13" y="599" width="280" height="50"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -39,12 +38,15 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="aOX-DY-sSo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ATk-CX-8Dz"/>
-                            <constraint firstItem="aOX-DY-sSo" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="LGc-Wr-pgJ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fhM-hc-KOZ" secondAttribute="trailing" constant="10" id="LRE-Gy-WeX"/>
-                            <constraint firstItem="fhM-hc-KOZ" firstAttribute="top" secondItem="aOX-DY-sSo" secondAttribute="bottom" constant="7" id="RZC-PT-x8N"/>
-                            <constraint firstItem="aOX-DY-sSo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="q8N-HM-JP3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fhM-hc-KOZ" secondAttribute="bottom" constant="5" id="wR0-39-Ve2"/>
+                            <constraint firstItem="fhM-hc-KOZ" firstAttribute="top" secondItem="aOX-DY-sSo" secondAttribute="bottom" constant="7" id="3W1-Wr-kRF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bDi-G0-5a5" secondAttribute="bottom" constant="17" id="7EA-GY-7og"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fhM-hc-KOZ" secondAttribute="trailing" constant="10" id="Ell-O1-fWa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fhM-hc-KOZ" secondAttribute="bottom" constant="5" id="EsT-GL-7yU"/>
+                            <constraint firstItem="aOX-DY-sSo" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="OYW-nF-Twc"/>
+                            <constraint firstItem="aOX-DY-sSo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="VWR-Cy-wne"/>
+                            <constraint firstItem="bDi-G0-5a5" firstAttribute="top" secondItem="aOX-DY-sSo" secondAttribute="bottom" constant="9" id="Xcy-U1-kfT"/>
+                            <constraint firstItem="aOX-DY-sSo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hHP-Nm-3sz"/>
+                            <constraint firstItem="bDi-G0-5a5" firstAttribute="top" secondItem="aOX-DY-sSo" secondAttribute="bottom" constant="9" id="hU3-5g-1pD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
