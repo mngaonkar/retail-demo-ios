@@ -92,19 +92,30 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         request?.setMappedCompletionBlockSuccess({ (request, response) in
             let response = response as! AIResponse
             print("Response count = \(response.result.fulfillment.messages.count)")
-            if let richResponse = response.result.fulfillment.messages.first{
-                let responseType = richResponse["type"] as! String
-                print("Response type = \(responseType)")
-                if responseType == "basic_card" {
-                    let imageResponse = richResponse["imageUrl"] as! String
-                    print("Image response from agent = \(imageResponse)")
-                } else if responseType == "simple_response" {
-                    let textResponse = richResponse["textToSpeech"] as! String
-                    print("Text response from agent = \(textResponse)")
-                    self.textToSpeech(text: textResponse)
+            response.result.fulfillment.messages.forEach({ (item) in
+
+                if item["type"] is String {
+                    let responseType = item["type"] as! String
+                    if responseType == "basic_card" {
+                        let imageResponse = item["image"] as! NSDictionary
+                        print("Image response from agent = \(imageResponse["url"] as! String)")
+                    } else if responseType == "simple_response" {
+                        let textResponse = item["textToSpeech"] as! String
+                        print("Text response from agent = \(textResponse)")
+                        self.textToSpeech(text: textResponse)
+                    }
+                } else if item["type"] is Int {
+                    let responseType = item["type"] as! Int
+                    switch responseType {
+                    case 0:
+                        let textResponse = item["speech"] as! String
+                        self.textToSpeech(text: textResponse)
+                    default:
+                        print("default case")
+                    }
                 }
-            }
-            
+                // print("Response platform = \(item["platform"] as! String)")
+            })
         }, failure: { (request, error) in
             print(error!)
         })
