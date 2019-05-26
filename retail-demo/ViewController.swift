@@ -65,10 +65,20 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         loadURL(urlAddress: "https://www.reddit.com/")
     }
     
+    func animateView(view: UIView, hidden: Bool) {
+        UIView.transition(with: view, duration: 0.5, options: [.transitionCurlUp], animations: {
+            view.isHidden = hidden
+        }, completion: nil)
+    }
+    
     // Open a dynamic web page in web view
     func loadURL(urlAddress: String) {
         let url = URL(string: urlAddress)!
+        animateView(view: webView, hidden: true)
         webView.load(URLRequest(url:url))
+        animateView(view: webView, hidden: false)
+        // animateWebView(hide: true)
+        
     }
     
     // Knock off web view out of sight
