@@ -61,8 +61,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         
         //rootView.insertSubview(webView, at: 0)
         
-        // loadURL(urlAddress: "https://cdn.pixabay.com/photo/2018/05/07/09/38/plants-3380443_960_720.jpg")
-        loadURL(urlAddress: "https://www.reddit.com/")
+        loadURL(urlAddress: "https://storage.googleapis.com/retail-kiosk.appspot.com/introduction.html")
     }
     
     func animateView(view: UIView, hidden: Bool) {
@@ -107,6 +106,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        print("View did load")
         // Do any additional setup after loading the view.
         // loadMap()
         // loadWebView()
@@ -114,12 +114,16 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         voiceButton.layer.cornerRadius = voiceButton.frame.height/2
         voiceButton.layer.shadowOpacity = 0.75
         voiceButton.layer.shadowRadius = 3
-            
+        
+        // spokenText.textAlignment = .center
+        // spokenText.textColor = UIColor.blue
+        
         // textToSpeech(text: "Welcome to meridian demo, have a great experience ahead")
     }
 
     // Put all the view related code here
     override func viewDidAppear(_ animated: Bool) {
+        print("View did appear")
         loadWebView()
         
         if webView != nil {
@@ -295,8 +299,9 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         return renderer
     }
     
+    // Get the current user location
     func locationManager(_ manager: MRLocationManager, didUpdateTo location: MRLocation) {
-        
+        print("Location update is x = \(location.point.x) y = \(location.point.y)")
     }
     
     // Speak out the text received from Google Assistant
@@ -306,6 +311,13 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         let utterance = AVSpeechUtterance(string: text)
         utterance.volume = 1.0
         synthesizer.speak(utterance)
+    }
+    
+    // Orientation has changed, resize the views
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        print("Orientation changed")
+        super.viewWillTransition(to: size, with: coordinator)
+        // self.webView.frame = self.containerView.frame
     }
 }
 
