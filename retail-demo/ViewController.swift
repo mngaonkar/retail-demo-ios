@@ -26,6 +26,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     var recognitionTask: SFSpeechRecognitionTask?
     var timer: Timer!
     var recordStatus: Bool = false
+    var currentView: UIView!
     
     // Get follwing IDs from Meridian editor URL
     let MAP_ID = "5764017373052928"
@@ -52,6 +53,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         
         webView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.addSubview(webView)
+        self.currentView = webView
         
         print("Total subviews = \(self.view.subviews.count)")
         // let rootView = self.view.subviews[0]
@@ -81,11 +83,13 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     // Knock off web view out of sight
     func unloadWebView() {
         self.webView.removeFromSuperview()
+        self.currentView = nil
     }
     
     // Here goes Meridian map
     func unloadMap() {
         self.mapView.removeFromSuperview()
+        self.currentView = nil
     }
     
     // Load Meridian map view for indoor navigation
@@ -100,6 +104,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         
         // Show Meridian map view
         self.containerView.addSubview(mapView)
+        self.currentView = mapView
     }
     
     // Create additional widget here
@@ -146,6 +151,11 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         let imageResponse = item["image"] as! NSDictionary
         let url = imageResponse["url"] as! String
         print("Image response from agent = \(url)")
+        if self.currentView != self.webView {
+            unloadMap()
+            loadWebView()
+        }
+        
         self.loadURL(urlAddress: url)
     }
     
@@ -160,9 +170,21 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     func handleCustomPayloadResponse(item: [AnyHashable:Any]) {
         let customResponse = item["payload"] as! NSDictionary
         let payload = customResponse["google"] as! NSDictionary
-        let url = payload["movie"] as! String
-        print("Movie response from agent = \(url)")
-        self.loadURL(urlAddress: url)
+        
+        if payload["movie"] != nil {
+            let url = payload["movie"] as! String
+            print("Movie response from agent = \(url)")
+            if self.currentView != self.webView {
+                unloadMap()
+                loadWebView()
+            }
+            
+            self.loadURL(urlAddress: url)
+        } else if payload["directions"] != nil {
+            unloadWebView()
+            loadMap()
+        }
+        
     }
     
     // Send request to Google Assistant and handle the response
