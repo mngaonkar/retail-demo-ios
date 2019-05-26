@@ -66,7 +66,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     }
     
     func animateView(view: UIView, hidden: Bool) {
-        UIView.transition(with: view, duration: 0.5, options: [.transitionCurlUp], animations: {
+        UIView.transition(with: view, duration: 0.5, options: [.transitionFlipFromRight], animations: {
             view.isHidden = hidden
         }, completion: nil)
     }
@@ -77,8 +77,6 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         animateView(view: webView, hidden: true)
         webView.load(URLRequest(url:url))
         animateView(view: webView, hidden: false)
-        // animateWebView(hide: true)
-        
     }
     
     // Knock off web view out of sight
@@ -139,6 +137,30 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         })
     }
     
+    // Image response
+    func handleBasicCardResponse(item: [AnyHashable:Any]) {
+        let imageResponse = item["image"] as! NSDictionary
+        let url = imageResponse["url"] as! String
+        print("Image response from agent = \(url)")
+        self.loadURL(urlAddress: url)
+    }
+    
+    // Simple text response
+    func handleSimpleResponse(item: [AnyHashable:Any]) {
+        let textResponse = item["textToSpeech"] as! String
+        print("Text response from agent = \(textResponse)")
+        self.textToSpeech(text: textResponse)
+    }
+    
+    // Custom response
+    func handleCustomPayloadResponse(item: [AnyHashable:Any]) {
+        let customResponse = item["payload"] as! NSDictionary
+        let payload = customResponse["google"] as! NSDictionary
+        let url = payload["movie"] as! String
+        print("Movie response from agent = \(url)")
+        self.loadURL(urlAddress: url)
+    }
+    
     // Send request to Google Assistant and handle the response
     func sendRequest(textRequest: String){
         var textResponseReceived = false
@@ -153,21 +175,12 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                 if item["type"] is String {
                     let responseType = item["type"] as! String
                     if responseType == "basic_card" {
-                        let imageResponse = item["image"] as! NSDictionary
-                        let url = imageResponse["url"] as! String
-                        print("Image response from agent = \(url)")
-                        self.loadURL(urlAddress: url)
+                        self.handleBasicCardResponse(item: item)
                     } else if responseType == "simple_response" {
-                        let textResponse = item["textToSpeech"] as! String
-                        print("Text response from agent = \(textResponse)")
-                        self.textToSpeech(text: textResponse)
+                        self.handleSimpleResponse(item: item)
                         textResponseReceived = true
                     } else if responseType == "custom_payload" {
-                        let customResponse = item["payload"] as! NSDictionary
-                        let payload = customResponse["google"] as! NSDictionary
-                        let url = payload["movie"] as! String
-                        print("Movie response from agent = \(url)")
-                        self.loadURL(urlAddress: url)
+                        self.handleCustomPayloadResponse(item: item)
                     }else {
                         print("Unknown response type = \(responseType)")
                     }
