@@ -232,6 +232,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                         }
                         
                         self.loadURL(urlAddress: url)
+                        // self.textToSpeech(text: item["text"] as! String)
                         
                     default:
                         print("default case")

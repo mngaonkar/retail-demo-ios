@@ -10,11 +10,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "retail-demo/ViewController.swift"
-            timestampString = "581075732.5210561"
+            timestampString = "581078234.938278"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "219"
             endingLineNumber = "219"
+            landmarkName = "sendRequest(textRequest:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.AIRequest&gt;, Swift.Optional&lt;Any&gt;) -&gt; () in retail_demo.ViewController.sendRequest(textRequest: Swift.String) -&gt; ()"
+                  moduleName = "retail-demo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mahadev/Library/Mobile%20Documents/com~apple~CloudDocs/Code/Swift/retail-demo/retail-demo/ViewController.swift"
+                  timestampString = "581077979.587074"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "219"
+                  endingLineNumber = "219"
+                  offsetFromSymbolStart = "3596">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.AIRequest&gt;, Swift.Optional&lt;Any&gt;) -&gt; () in retail_demo.ViewController.sendRequest(textRequest: Swift.String) -&gt; ()"
+                  moduleName = "retail-demo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mahadev/Library/Mobile%20Documents/com~apple~CloudDocs/Code/Swift/retail-demo/retail-demo/ViewController.swift"
+                  timestampString = "581077979.5911289"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "219"
+                  endingLineNumber = "219"
+                  offsetFromSymbolStart = "4788">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "retail-demo/ViewController.swift"
+            timestampString = "581078234.938798"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "sendRequest(textRequest:)"
             landmarkType = "7">
          </BreakpointContent>
