@@ -72,6 +72,13 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
         }, completion: nil)
     }
     
+    // Load HTML content
+    func loadHTML(content: String) {
+        animateView(view: webView, hidden: true)
+        webView.loadHTMLString(content, baseURL: Bundle.main.bundleURL)
+        animateView(view: webView, hidden: false)
+    }
+    
     // Open a dynamic web page in web view
     func loadURL(urlAddress: String) {
         let url = URL(string: urlAddress)!
@@ -224,14 +231,20 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                             self.textToSpeech(text: textResponse)
                         }
                     case 1:
+                        let content = """
+                        <p style="font-size:600%;"> \(item["title"] as! String) </p>
+                        <img width=100% src = "\(item["imageUrl"] as! String)"</img>
+                        """
                         let url = item["imageUrl"] as! String
+                            
                         print("Image response from agent = \(url)")
                         if self.currentView != self.webView {
                             self.unloadMap()
                             self.loadWebView()
                         }
                         
-                        self.loadURL(urlAddress: url)
+                        self.loadHTML(content: content)
+                        // self.loadURL(urlAddress: url)
                         // self.textToSpeech(text: item["text"] as! String)
                         
                     default:
