@@ -148,6 +148,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     
     // Image response
     func handleBasicCardResponse(item: [AnyHashable:Any]) {
+        print("basic card response received")
         let imageResponse = item["image"] as! NSDictionary
         let url = imageResponse["url"] as! String
         print("Image response from agent = \(url)")
@@ -161,6 +162,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     
     // Simple text response
     func handleSimpleResponse(item: [AnyHashable:Any]) {
+        print("simple response received")
         let textResponse = item["textToSpeech"] as! String
         print("Text response from agent = \(textResponse)")
         self.textToSpeech(text: textResponse)
@@ -168,6 +170,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     
     // Custom response
     func handleCustomPayloadResponse(item: [AnyHashable:Any]) {
+        print("custom response received")
         let customResponse = item["payload"] as! NSDictionary
         let payload = customResponse["google"] as! NSDictionary
         
@@ -212,6 +215,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                     }
                 } else if item["type"] is Int {
                     let responseType = item["type"] as! Int
+                    print("response type received = \(responseType)")
                     switch responseType {
                     case 0:
                         let textResponse = item["speech"] as! String
@@ -219,6 +223,15 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                         if !textResponseReceived {
                             self.textToSpeech(text: textResponse)
                         }
+                    case 1:
+                        let url = item["imageUrl"] as! String
+                        print("Image response from agent = \(url)")
+                        if self.currentView != self.webView {
+                            self.unloadMap()
+                            self.loadWebView()
+                        }
+                        
+                        self.loadURL(urlAddress: url)
                         
                     default:
                         print("default case")
