@@ -10,71 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "retail-demo/ViewController.swift"
-            timestampString = "581083827.143906"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "sendRequest(textRequest:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.AIRequest&gt;, Swift.Optional&lt;Any&gt;) -&gt; () in retail_demo.ViewController.sendRequest(textRequest: Swift.String) -&gt; ()"
-                  moduleName = "retail-demo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mahadev/Library/Mobile%20Documents/com~apple~CloudDocs/Code/Swift/retail-demo/retail-demo/ViewController.swift"
-                  timestampString = "581077979.587074"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "219"
-                  endingLineNumber = "219"
-                  offsetFromSymbolStart = "3596">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.AIRequest&gt;, Swift.Optional&lt;Any&gt;) -&gt; () in retail_demo.ViewController.sendRequest(textRequest: Swift.String) -&gt; ()"
-                  moduleName = "retail-demo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mahadev/Library/Mobile%20Documents/com~apple~CloudDocs/Code/Swift/retail-demo/retail-demo/ViewController.swift"
-                  timestampString = "581077979.5911289"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "219"
-                  endingLineNumber = "219"
-                  offsetFromSymbolStart = "4788">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "retail-demo/ViewController.swift"
-            timestampString = "581083827.144426"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
-            landmarkName = "sendRequest(textRequest:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "retail-demo/ViewController.swift"
-            timestampString = "581083827.144752"
+            timestampString = "581087034.526678"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "234"
@@ -90,12 +26,140 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "retail-demo/ViewController.swift"
-            timestampString = "581083827.145107"
+            timestampString = "581087034.527414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
-            landmarkName = "sendRequest(textRequest:)"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
+            landmarkName = "startRecording()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "retail-demo/ViewController.swift"
+            timestampString = "581087034.527805"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "restartSpeechTimer()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "retail_demo.ViewController.restartSpeechTimer() -&gt; ()"
+                  moduleName = "retail-demo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mahadev/Library/Mobile%20Documents/com~apple~CloudDocs/Code/Swift/retail-demo/retail-demo/ViewController.swift"
+                  timestampString = "581085199.678218"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "192">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.NSTimer) -&gt; () in retail_demo.ViewController.restartSpeechTimer() -&gt; ()"
+                  moduleName = "retail-demo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mahadev/Library/Mobile%20Documents/com~apple~CloudDocs/Code/Swift/retail-demo/retail-demo/ViewController.swift"
+                  timestampString = "581085199.681192"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "116">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "retail-demo/ViewController.swift"
+            timestampString = "581087034.5281529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
+            landmarkName = "startRecording()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "retail_demo.ViewController.startRecording() -&gt; ()"
+                  moduleName = "retail-demo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mahadev/Library/Mobile%20Documents/com~apple~CloudDocs/Code/Swift/retail-demo/retail-demo/ViewController.swift"
+                  timestampString = "581087034.830462"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "277"
+                  endingLineNumber = "277"
+                  offsetFromSymbolStart = "664">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.AVAudioPCMBuffer, __C.AVAudioTime) -&gt; () in retail_demo.ViewController.startRecording() -&gt; ()"
+                  moduleName = "retail-demo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mahadev/Library/Mobile%20Documents/com~apple~CloudDocs/Code/Swift/retail-demo/retail-demo/ViewController.swift"
+                  timestampString = "581087034.833405"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "278"
+                  endingLineNumber = "278"
+                  offsetFromSymbolStart = "128">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "retail-demo/ViewController.swift"
+            timestampString = "581087034.528514"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "startRecording()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "retail-demo/ViewController.swift"
+            timestampString = "581087034.528855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "startRecording()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

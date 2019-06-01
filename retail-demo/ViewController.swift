@@ -269,9 +269,12 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     func startRecording(){
         print("Starting recording")
         let node = audioEngine.inputNode
-        let format = node.outputFormat(forBus: 0)
+        // let format = node.outputFormat(forBus: 0)
+        // let format = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 1)
+        let format = AVAudioFormat(standardFormatWithSampleRate: audioEngine.inputNode.inputFormat(forBus: 0).sampleRate, channels: 1)
         
-        node.installTap(onBus: 0, bufferSize: 1024, format: format) { (buffer, _) in
+        
+        node.installTap(onBus: 0, bufferSize: 4096, format: format) { (buffer, _) in
             self.request.append(buffer)
         }
         print("Tap installed")
@@ -306,7 +309,7 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
                 // Restart the voice recognition as we want to capture few words only
                 if (error == nil){
                     self.restartSpeechTimer()
-                    print("Speech time out")
+                    print("Started wait time for conversation")
                 }
             } else if let error = error {
                 print("Error occured during recognition = \(error)")
@@ -321,9 +324,9 @@ class ViewController: UIViewController, MRMapViewDelegate, MRLocationManagerDele
     // Stop listening to user voice
     func stopRecording(){
         print("Stoping recording...")
+        
         audioEngine.stop()
-        let node = audioEngine.inputNode
-        node.removeTap(onBus: 0)
+        audioEngine.inputNode.removeTap(onBus: 0)
         recognitionTask?.finish()
         request.endAudio()
         print("Recording stopped")

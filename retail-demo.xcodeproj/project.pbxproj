@@ -76,7 +76,6 @@
 				409934225AD547FDBD0B6F3D /* Pods-retail-demoTests.debug.xcconfig */,
 				7F17FBDA66AE1FE8EEB144B7 /* Pods-retail-demoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
